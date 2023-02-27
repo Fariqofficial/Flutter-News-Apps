@@ -78,7 +78,6 @@ class CustomNews extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20)
                 ],
               ),
             ),

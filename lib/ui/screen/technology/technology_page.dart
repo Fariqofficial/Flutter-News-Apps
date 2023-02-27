@@ -1,13 +1,13 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, avoid_print
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_news_app/blocs/business/business_bloc.dart';
+import 'package:flutter_news_app/blocs/technology/technology_bloc.dart';
 import 'package:flutter_news_app/shared/themes.dart';
 import 'package:flutter_news_app/ui/widgets/custom_news.dart';
 
-class BusinessPage extends StatelessWidget {
-  const BusinessPage({super.key});
+class TechnologyPage extends StatelessWidget {
+  const TechnologyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class BusinessPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.5,
         centerTitle: true,
-        backgroundColor: whiteColor,
+        backgroundColor: lightBgColor,
         automaticallyImplyLeading: false,
         title: Container(
           child: Image.asset(
@@ -27,26 +27,26 @@ class BusinessPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          businessNewsSection(),
+          techSection(),
         ],
       ),
     );
   }
 
-  Widget businessNewsSection() {
+  Widget techSection() {
     return BlocProvider(
-      create: (context) => BusinessBloc()..add(GetBusinessCategory()),
-      child: BlocBuilder<BusinessBloc, BusinessState>(
+      create: (context) => TechnologyBloc()..add(GetTechArticle()),
+      child: BlocBuilder<TechnologyBloc, TechnologyState>(
         builder: (context, state) {
           print(state);
           //Jika State Success
-          if (state is BusinessSuccess) {
+          if (state is TechnologySuccess) {
             return Container(
               margin: EdgeInsets.only(top: 23),
               child: Column(
-                children: state.business.map((business) {
+                children: state.techData.map((tech) {
                   return CustomNews(
-                    articleModel: business,
+                    articleModel: tech,
                   );
                 }).toList(),
               ),

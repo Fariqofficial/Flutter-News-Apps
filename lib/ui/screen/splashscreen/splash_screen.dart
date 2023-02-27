@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/shared/themes.dart';
 import 'package:flutter_news_app/ui/screen/homepage/home_page.dart';
+import 'package:flutter_news_app/ui/screen/main_page.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -15,7 +16,7 @@ class SplashScreen extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => MainPage(),
         ),
       );
     });

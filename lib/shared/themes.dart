@@ -8,6 +8,7 @@ Color whiteColor = const Color(0xffFFFFFF);
 Color blackColor = const Color(0xff072D4B);
 Color greyColor = const Color(0xffA4A8AE);
 Color blueColor = const Color(0xff2F9FF8);
+Color transparentColor = Colors.transparent;
 Color lightBgColor = const Color(0xffF4F9F8);
 Color greenColor = const Color(0xff22B07D);
 Color redColor = const Color(0xffFF2566);

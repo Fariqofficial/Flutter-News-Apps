@@ -17,80 +17,73 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget buildContent(int currentIndex) {
-      switch (currentIndex) {
-        case 0:
-          return HomePage();
-        case 1:
-          return BusinessPage();
-        case 2:
-          return SportsPage();
-        case 3:
-          return HealthPage();
-        case 4:
-          return EntertainmentPage();
-        case 5:
-          return TechnologyPage();
-        default:
-          return HomePage();
-      }
-    }
-
-    Widget bottomNavigationBar() {
-      return Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          width: double.infinity,
-          height: 55,
-          decoration: BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.circular(18),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              CustomBottomNav(
-                index: 0,
-                imageUrl: 'assets/icon_home.png',
-              ),
-              CustomBottomNav(
-                index: 1,
-                imageUrl: 'assets/icon_business.png',
-              ),
-              CustomBottomNav(
-                index: 2,
-                imageUrl: 'assets/icon_sports.png',
-              ),
-              CustomBottomNav(
-                index: 3,
-                imageUrl: 'assets/icon_health.png',
-              ),
-              CustomBottomNav(
-                index: 4,
-                imageUrl: 'assets/icon_entertainment.png',
-              ),
-              CustomBottomNav(
-                index: 5,
-                imageUrl: 'assets/icon_technology.png',
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
     return BlocBuilder<PageCubit, int>(
       builder: (context, state) {
         return Scaffold(
           backgroundColor: lightBgColor,
-          body: Stack(
-            children: [
-              buildContent(state),
-              bottomNavigationBar(),
-            ],
-          ),
+          bottomNavigationBar: bottomNavigationBar(),
+          body: buildContent(state),
         );
       },
+    );
+  }
+
+  Widget buildContent(int currentIndex) {
+    switch (currentIndex) {
+      case 0:
+        return HomePage();
+      case 1:
+        return BusinessPage();
+      case 2:
+        return SportsPage();
+      case 3:
+        return HealthPage();
+      case 4:
+        return EntertainmentPage();
+      case 5:
+        return TechnologyPage();
+      default:
+        return HomePage();
+    }
+  }
+
+  Widget bottomNavigationBar() {
+    return Container(
+      width: double.infinity,
+      height: 55,
+      decoration: BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          CustomBottomNav(
+            index: 0,
+            imageUrl: 'assets/icon_home.png',
+          ),
+          CustomBottomNav(
+            index: 1,
+            imageUrl: 'assets/icon_business.png',
+          ),
+          CustomBottomNav(
+            index: 2,
+            imageUrl: 'assets/icon_sports.png',
+          ),
+          CustomBottomNav(
+            index: 3,
+            imageUrl: 'assets/icon_health.png',
+          ),
+          CustomBottomNav(
+            index: 4,
+            imageUrl: 'assets/icon_entertainment.png',
+          ),
+          CustomBottomNav(
+            index: 5,
+            imageUrl: 'assets/icon_technology.png',
+          ),
+        ],
+      ),
     );
   }
 }

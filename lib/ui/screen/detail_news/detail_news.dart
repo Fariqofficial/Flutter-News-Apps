@@ -1,11 +1,18 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/models/article_model.dart';
 import 'package:flutter_news_app/shared/themes.dart';
 import 'package:flutter_news_app/ui/widgets/custom_button.dart';
+import 'package:intl/intl.dart';
 
 class DetailNews extends StatelessWidget {
-  const DetailNews({super.key});
+  final ArticleModel data;
+
+  const DetailNews({
+    super.key,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +23,12 @@ class DetailNews extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(
-              'assets/img_example.png',
-            ),
-          ),
+              fit: BoxFit.cover,
+              image: data.urlToImage == null
+                  ? AssetImage(
+                      'assets/icon_logo.png',
+                    )
+                  : NetworkImage(data.urlToImage!) as ImageProvider),
         ),
       );
     }
@@ -65,7 +73,7 @@ class DetailNews extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Leak: Samsung to announce the Z Fold 3 and Galaxy Watch 4 in August',
+                    data.title.toString(),
                     style: blackText.copyWith(
                       fontSize: 26,
                       fontWeight: bold,
@@ -75,7 +83,9 @@ class DetailNews extends StatelessWidget {
                   ),
                   SizedBox(height: 35),
                   Text(
-                    'Samsung had a pretty quiet Mobile World Congress event, but it did tell us we’d learn more about its upcoming Google-approved smartwatch at its next Unpacked event. Unfortunately, the company didn’t tell us when exactly that would be, but a new report from Korean publication DigitalDaily News (via 9to5Google) claims the next Unpacked will take place on...',
+                    data.description == null
+                        ? 'null'
+                        : data.description.toString(),
                     style: greyText.copyWith(
                       fontSize: 17,
                     ),
@@ -86,12 +96,14 @@ class DetailNews extends StatelessWidget {
                   ),
                   SizedBox(height: 50),
                   Text(
-                    'Published July 5',
+                    DateFormat('MMM dd').format(
+                      data.publishedAt ?? DateTime.now(),
+                    ),
                     style: greyText,
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Author : John Abraham',
+                    'Author : ${data.author}',
                     style: blackText,
                   ),
                   SizedBox(height: 30),

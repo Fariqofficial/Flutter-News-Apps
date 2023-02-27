@@ -21,6 +21,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ArticleModel? articleSelected;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,8 +60,19 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.only(top: 23),
               child: Column(
                 children: state.articles.map((article) {
-                  return CustomNews(
-                    articleModel: article,
+                  return GestureDetector(
+                    onTap: () {
+                      setState(
+                        () {
+                          articleSelected = article;
+                        },
+                      );
+                      print(articleSelected);
+                    },
+                    child: CustomNews(
+                      articleModel: article,
+                      isSelected: article.url == articleSelected?.url,
+                    ),
                   );
                 }).toList(),
               ),
